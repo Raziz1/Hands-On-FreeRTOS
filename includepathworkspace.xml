@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cdtprojectproperties>
+  <section name="org.eclipse.cdt.internal.ui.wizards.settingswizards.IncludePaths">
+    <language id="org.eclipse.cdt.core.assembly" name="s,S">
+      <includepath>C:\Users\rahim\Downloads\Udemy\Mastering RTOS Hands on FreeRTOS and STM32Fx with Debugging\RTOS_Workspace\common_RTOS\ThirdParty\SEGGER\Config</includepath>
+      <includepath>C:\Users\rahim\Downloads\Udemy\Mastering RTOS Hands on FreeRTOS and STM32Fx with Debugging\RTOS_Workspace\common_RTOS\ThirdParty\SEGGER\SEGGER</includepath>
+    </language>
+    <language id="org.eclipse.cdt.core.gcc" name="C Source File">
+      <includepath>Core/Inc</includepath>
+      <includepath>Drivers/STM32F7xx_HAL_Driver/Inc</includepath>
+      <includepath>Drivers/STM32F7xx_HAL_Driver/Inc/Legacy</includepath>
+      <includepath>Drivers/CMSIS/Device/ST/STM32F7xx/Include</includepath>
+      <includepath>Drivers/CMSIS/Include</includepath>
+      <includepath>C:\Users\rahim\Downloads\Udemy\Mastering RTOS Hands on FreeRTOS and STM32Fx with Debugging\RTOS_Workspace\common_RTOS\ThirdParty\FreeRTOS\include</includepath>
+      <includepath>C:\Users\rahim\Downloads\Udemy\Mastering RTOS Hands on FreeRTOS and STM32Fx with Debugging\RTOS_Workspace\common_RTOS\ThirdParty\FreeRTOS\portable\GCC\ARM_CM7</includepath>
+      <includepath>C:\Users\rahim\Downloads\Udemy\Mastering RTOS Hands on FreeRTOS and STM32Fx with Debugging\RTOS_Workspace\common_RTOS\ThirdParty\SEGGER\Config</includepath>
+      <includepath>C:\Users\rahim\Downloads\Udemy\Mastering RTOS Hands on FreeRTOS and STM32Fx with Debugging\RTOS_Workspace\common_RTOS\ThirdParty\SEGGER\OS</includepath>
+      <includepath>C:\Users\rahim\Downloads\Udemy\Mastering RTOS Hands on FreeRTOS and STM32Fx with Debugging\RTOS_Workspace\common_RTOS\ThirdParty\SEGGER\SEGGER</includepath>
+      <includepath>C:\Users\rahim\Downloads\Udemy\Mastering RTOS Hands on FreeRTOS and STM32Fx with Debugging\RTOS_Workspace\common_RTOS\ThirdParty\FreeRTOS</includepath>
+      <includepath>C:\Users\rahim\Downloads\Udemy\Mastering RTOS Hands on FreeRTOS and STM32Fx with Debugging\RTOS_Workspace\common_RTOS\ThirdParty\FreeRTOS\portable\GCC\ARM_CM7\r0p1</includepath>
+    </language>
+    <language name="Object File"/>
+  </section>
+  <section name="org.eclipse.cdt.internal.ui.wizards.settingswizards.Macros">
+    <language id="org.eclipse.cdt.core.assembly" name="s,S">
+      <macro>
+        <name>DEBUG</name>
+        <value/>
+      </macro>
+    </language>
+    <language id="org.eclipse.cdt.core.gcc" name="C Source File">
+      <macro>
+        <name>DEBUG</name>
+        <value/>
+      </macro>
+      <macro>
+        <name>USE_HAL_DRIVER</name>
+        <value/>
+      </macro>
+      <macro>
+        <name>STM32F767xx</name>
+        <value/>
+      </macro>
+    </language>
+    <language name="Object File"/>
+  </section>
+</cdtprojectproperties>
