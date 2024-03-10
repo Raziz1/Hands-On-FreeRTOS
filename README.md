@@ -131,7 +131,45 @@ In the above snapshot...
 7. The LED_green_task enters a block of code which turns on the green LED, suspends the scheduler, sets the next_task_handle, resumes the scheduler, and then deletes the current LED_green_task
 8. Then the scheduler returns to it's idle state until the next tick
 
+## Example 006_LED_BTN_ISR
+The goal of this example is exactly the same as the previous one with one key difference. For the button programming we are going to use a hardware button interrupt handler rather than a scheduled task. 
 
+### RTOS API's Used
+* [xTaskNotifyFromISR](https://www.freertos.org/xTaskNotifyFromISR.html) - Versions of xTaskNotify() and xTaskNotifyIndexed() that can be used from an interrupt service routine (ISR)
+* [traceISR_ENTER()](https://www.freertos.org/rtos-trace-macros.html) - Helps the SEGGER system viewer trace that we have entered an interrupt
+* [portENTER_CRITICAL()](https://www.freertos.org/taskENTER_CRITICAL_taskEXIT_CRITICAL.html) - In this example, this function is used because we are modifying a variable that is shared between tasks and an interrupt. This allows us to disable interrupts before changing the variable.
+
+### Hardware Interrupts vs Kernel Interrupts
+* ARM Cortex M7 has 16 priority levels that range from 0x00 - 0xF0. 0x00 is the highest priority and 0xF0 is the lowest priority.
+* The macro <i>configMAX_SYSCALL_INTERRUPT_PRIORITY</i> determines the highest level priority value that an interrupt routine using "FromISR" can use.
+* Interrupts that do not call API functions can execute at priorities above the macro <i>configMAX_SYSCALL_INTERRUPT_PRIORITY</i> and therefore never be delayed bu the RTOS. 
+
+### Configuring EXTI line interrupt
+* <i>006_LED_BTN_ISR.ioc -> System Core -> NVIC -> EXTI 15_10 interrupt -> Preemption Priority </i>
+* Pick a priority level that is smaller than the macro <i>configMAX_SYSCALL_INTERRUPT_PRIORITY</i>
+
+<p align="center">
+    <img title="LED Button ISR" alt="SEGGER SystemView" src="./Recordings/ledbtn_isr_recording_image.png" width="1000" height="500">
+</p>
+<p align="center">
+    <i>
+    LED button ISR scheduling captured in the SEGGER SystemView
+    </i>
+</p>
+
+In the above snapshot...
+1. The scheduler tick is running every 10ms
+2. The user button is pressed which triggers an interrupt
+3. The interrupt handler runs the button handler function. 
+4. The button handler function calls xTaskNotifyFromISR(next_task_handle, 0, eNoAction, &pxHigherPriorityTaskWoken) which sends a notification to the next_task_handle (In this case it is LED_green_task)
+    * <i>&pxHigherPriorityTaskWoken</i> - xTaskNotifyFromISR() will set *pxHigherPriorityTaskWoken to pdTRUE if sending the notification caused a task to unblock, and the unblocked task has a priority higher than the currently running task.
+    * If this parameter was set to NULL then the scheduler would have continued to run the previously running idle task despite the LED_green_task being a higher priority and in the ready state. This would result in LED_green_task being run during the next scheduler tick rather than instantly. 
+5. portYIELD_FROM_ISR(pxHigherPriorityTaskWoken) causes the scheduler to complete a context switch to run the next highest priority task which is ready 
+6. The LED_green_task is run 
+7. The green LED is toggled
+8. the LED_green_task calls the function xTaskNotifyWait(0,0, NULL, pdMS_TO_TICKS(1000)) and notices that it has received a notification from another task
+9. The LED_green_task enters a block of code which turns on the green LED, suspends the scheduler, sets the next_task_handle, resumes the scheduler, and then deletes the current LED_green_task
+10. Then the scheduler returns to it's idle state until the next tick
 
 # Resources
 
