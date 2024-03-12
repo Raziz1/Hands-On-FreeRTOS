@@ -137,7 +137,7 @@ The goal of this example is exactly the same as the previous one with one key di
 ### RTOS API's Used
 * [xTaskNotifyFromISR](https://www.freertos.org/xTaskNotifyFromISR.html) - Versions of xTaskNotify() and xTaskNotifyIndexed() that can be used from an interrupt service routine (ISR)
 * [traceISR_ENTER()](https://www.freertos.org/rtos-trace-macros.html) - Helps the SEGGER system viewer trace that we have entered an interrupt
-* [portENTER_CRITICAL()](https://www.freertos.org/taskENTER_CRITICAL_taskEXIT_CRITICAL.html) - In this example, this function is used because we are modifying a variable that is shared between tasks and an interrupt. This allows us to disable interrupts before changing the variable.
+* [portENTER_CRITICAL()](https://www.freertos.org/taskENTER_CRITICAL_taskEXIT_CRITICAL.html) - In this example, this function is used because we are modifying a variable that is shared between tasks and an interrupt. This allows us to disable (<b>KERNEL</b>) interrupts before changing the variable.
 
 ### Hardware Interrupts vs Kernel Interrupts
 * ARM Cortex M7 has 16 priority levels that range from 0x00 - 0xF0. 0x00 is the highest priority and 0xF0 is the lowest priority.
@@ -170,6 +170,40 @@ In the above snapshot...
 8. the LED_green_task calls the function xTaskNotifyWait(0,0, NULL, pdMS_TO_TICKS(1000)) and notices that it has received a notification from another task
 9. The LED_green_task enters a block of code which turns on the green LED, suspends the scheduler, sets the next_task_handle, resumes the scheduler, and then deletes the current LED_green_task
 10. Then the scheduler returns to it's idle state until the next tick
+
+## Example 007_Task_Priority
+The following example is composed of the below tasks:
+
+Task 1
+* Priority: 2
+* A continuous task that toggles the green led with a period of 100ms
+
+Task 2
+* Priority: 3
+* A continuous task that toggles the red led with a period of 1000ms
+
+* When the user button is pressed, the priority of both tasks should be exchanged
+
+### RTOS API's Used
+* [xTaskGetHandle()](https://www.freertos.org/a00021.html#xTaskGetHandle) - Looks up the handle of a task from the task's name.
+* [uxTaskPriorityGet()](https://www.freertos.org/a00128.html) - Obtain the priority of any task.
+* [vTaskPrioritySet](https://www.freertos.org/a00129.html) - Set the priority of any task. A context switch will occur before the function returns if the priority being set is higher than the currently executing task.
+
+<p align="center">
+    <img title="Task Priority Exchange" alt="SEGGER SystemView" src="./Recordings/task_priority_recording_image.png" width="1000" height="500">
+</p>
+<p align="center">
+    <i>
+    Task priority exchange captured in the SEGGER SystemView
+    </i>
+</p>
+
+In the above snapshot...
+1. ISR56 is a hardware interrupt triggered by the user button. This manipulates a global variable to indicate a priority swap is desired
+2. The scheduler tick continues to run every 10ms but doesn't call a context switch because a hardware delay (HAL_DELAY()) of 1000ms is called every time Task 1 is called.
+3. At the end the HAL_DELAY() the scheduler tick is called but continues to run Task 1 because it has a higher priority. 
+4. Since the global variable to indicate a priority swap has been set, Task 1 will run a chunk of code to swap the priority value of Task 1 and Task 2
+5. The scheduler then runs the next highest priority task which is now Task 2.
 
 # Resources
 
