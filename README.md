@@ -205,5 +205,8 @@ In the above snapshot...
 4. Since the global variable to indicate a priority swap has been set, Task 1 will run a chunk of code to swap the priority value of Task 1 and Task 2
 5. The scheduler then runs the next highest priority task which is now Task 2.
 
-# Resources
+# Other RTOS API's to explore
+* [Hook Functions](https://www.freertos.org/a00016.html) - FreeRTOS hook functions can be called from certain RTOS events. The most common is from the idle hook task. The idle hook function is an ideal place to put the processor into a low power state - providing an automatic power saving whenever there is no processing to be performed.
 
+# Resources
+* [FreeRTOS Emulator](https://www.freertos.org/FreeRTOS-Windows-Simulator-Emulator-for-Visual-Studio-and-Eclipse-MingW.html)
