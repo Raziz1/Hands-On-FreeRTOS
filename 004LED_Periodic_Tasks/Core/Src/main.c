@@ -294,7 +294,7 @@ static void led_green_handler(void* parameters)
 	last_wakeup_time = xTaskGetTickCount();
 	while (1)
 	{
-		//printf("%s\n", (char*)parameters);
+		printf("%s\n", (char*)parameters);
 		snprintf(msg, 100, "%s\n", (char*)parameters);
 		SEGGER_SYSVIEW_PrintfTarget(msg);
 		HAL_GPIO_TogglePin(GPIOB, LED_GREEN_PIN);
@@ -309,7 +309,7 @@ static void led_red_handler(void* parameters)
 	last_wakeup_time = xTaskGetTickCount();
 	while (1)
 	{
-		//printf("%s\n", (char*)parameters);
+		printf("%s\n", (char*)parameters);
 		snprintf(msg, 100, "%s\n", (char*)parameters);
 		SEGGER_SYSVIEW_PrintfTarget(msg);
 		HAL_GPIO_TogglePin(GPIOB, LED_RED_PIN);
@@ -324,7 +324,7 @@ static void led_blue_handler(void* parameters)
 	last_wakeup_time = xTaskGetTickCount();
 	while (1)
 	{
-		//printf("%s\n", (char*)parameters);
+		printf("%s\n", (char*)parameters);
 		snprintf(msg, 100, "%s\n", (char*)parameters);
 		SEGGER_SYSVIEW_PrintfTarget(msg);
 		HAL_GPIO_TogglePin(GPIOB, LED_BLUE_PIN);

@@ -118,6 +118,8 @@ int main(void)
 
     DWT->CTRL |= DWT_CTRL_CYCCNTENA_Msk;
 
+  printf("ITM DEBUGGER TEST");
+
   // Start the SEGGER recorder
   SEGGER_SYSVIEW_Conf();
   SEGGER_SYSVIEW_Start();
@@ -158,6 +160,7 @@ int main(void)
 		handle_led_timer[i] = xTimerCreate("led_timer",pdMS_TO_TICKS(500),pdTRUE, (void*)(i+1),led_effect_callback);
 	}
 
+	rtc_timer = xTimerCreate ("rtc_report_timer",pdMS_TO_TICKS(1000),pdTRUE,NULL,rtc_report_callback);
 
 	// Enable UART receive interrupt
 	UART_Start_Receive_IT(&huart3, (uint8_t*)&user_data, 1);
@@ -452,6 +455,12 @@ void led_effect_callback(TimerHandle_t xTimer)
 		LED_effect4();
 		break;
 	}
+
+}
+
+void rtc_report_callback( TimerHandle_t xTimer )
+{
+	 show_time_date_itm();
 
 }
 

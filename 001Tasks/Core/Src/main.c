@@ -284,7 +284,7 @@ static void task1_handler(void* parameters)
 	char msg[100];
 	while (1)
 	{
-		//printf("%s\n", (char*)parameters);
+		printf("%s\n", (char*)parameters);
 		snprintf(msg, 100, "%s\n", (char*)parameters);
 		SEGGER_SYSVIEW_PrintfTarget(msg);
 		taskYIELD();
@@ -296,7 +296,7 @@ static void task2_handler(void* parameters)
 	char msg[100];
 	while (1)
 	{
-		//printf("%s\n", (char*)parameters);
+		printf("%s\n", (char*)parameters);
 		snprintf(msg, 100, "%s\n", (char*)parameters);
 		SEGGER_SYSVIEW_PrintfTarget(msg);
 		taskYIELD();
