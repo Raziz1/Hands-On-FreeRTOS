@@ -208,5 +208,29 @@ In the above snapshot...
 # Other RTOS API's to explore
 * [Hook Functions](https://www.freertos.org/a00016.html) - FreeRTOS hook functions can be called from certain RTOS events. The most common is from the idle hook task. The idle hook function is an ideal place to put the processor into a low power state - providing an automatic power saving whenever there is no processing to be performed.
 
+## Example 008_Queues_n_Timers
+The following example is a FreeRTOS application that takes input(commands) from the user over UART and handles LED and real-time clock (RTC) peripherals of the microcontroller.
+
+<p align="center">
+    <img title="Example 008 Menu's" alt="SEGGER SystemView" src="./Recordings/008_Task_Menus.png" width="1000" height="500">
+</p>
+<p align="center">
+    <i>
+    Example 008 Menu's
+    </i>
+</p>
+<p align="center">
+    <img title="Example 008 Menu's" alt="SEGGER SystemView" src="./Recordings/State Machine Diagram.jpg" width="1000" height="500">
+</p>
+<p align="center">
+    <i>
+    Example 008 State Machine Diagram
+    </i>
+</p>
+
+### RTOS API's Used
+* [FreeRTOS Queues](https://www.freertos.org/Embedded-RTOS-Queues.html)
+* [FreeRTOS Timers](https://www.freertos.org/FreeRTOS-Software-Timer-API-Functions.html)
+
 # Resources
 * [FreeRTOS Emulator](https://www.freertos.org/FreeRTOS-Windows-Simulator-Emulator-for-Visual-Studio-and-Eclipse-MingW.html)
