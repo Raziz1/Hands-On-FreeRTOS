@@ -25,6 +25,7 @@ The topics in this repository include:
 * [NUCLEO-F767ZI](https://www.st.com/en/evaluation-tools/nucleo-f767zi.html)
 * [FreeRTOS](https://www.freertos.org/index.html)
 * [SEGGER SystemView](https://www.segger.com/products/development-tools/systemview/)
+* [REALTERM](https://sourceforge.net/projects/realterm/)
 
 ## Pre-emptive vs Cooperative scheduling
 
@@ -231,6 +232,15 @@ The following example is a FreeRTOS application that takes input(commands) from 
 ### RTOS API's Used
 * [FreeRTOS Queues](https://www.freertos.org/Embedded-RTOS-Queues.html)
 * [FreeRTOS Timers](https://www.freertos.org/FreeRTOS-Software-Timer-API-Functions.html)
+
+<p align="center">
+    <img title="Example 008 SystemView" alt="SEGGER SystemView" src="./Recordings/008_recording_image.png" width="1000" height="500">
+</p>
+<p align="center">
+    <i>
+    Example 008 receiving LED task command (e4)
+    </i>
+</p>
 
 # Resources
 * [FreeRTOS Emulator](https://www.freertos.org/FreeRTOS-Windows-Simulator-Emulator-for-Visual-Studio-and-Eclipse-MingW.html)
