@@ -242,5 +242,34 @@ The following example is a FreeRTOS application that takes input(commands) from 
     </i>
 </p>
 
+## Example 009_Bin_Sema_Task
+The following example uses binary semaphores to synchronize two tasks. In this example there are two tasks, a manager task and employee task.
+* Employee task
+    1. The employee will check if the manager has assigned it a job (Check for binary semaphore)
+    2. The employee will check if the manager has sent valid data for the job (Check the queue for data)
+    3. The employee will receive a random number between 10-50 (from the manager) and will run a task delay for that many ms to simulate a job being done
+    4. Once the job has been completed it will notify the manager task (Using binary semaphore)
+* Manager task
+    1. The manager will check if the employee is busy (Check for binary semaphore)
+    2. The manager will generate a random number between 10-50 if the employee is not busy.
+    3. The manager will then send it to a queue for the employee to check. 
+    4. The manager task will then yield itself until the employee has completed its task and returned the semaphore.
+
+It is important to note that this example has been designed to use the semaphore to trigger context switching rather than the contents of the queue. 
+
+*Note 'Task Notifications' can provide a light weight alternative to binary semaphores in many situations*
+
+### RTOS API's Used
+* [FreeRTOS Binary Semaphores](https://www.freertos.org/Embedded-RTOS-Binary-Semaphores.html)
+
+<p align="center">
+    <img title="Example 009 SystemView" alt="SEGGER SystemView" src="./Recordings/009_recording_image.png" width="1000" height="500">
+</p>
+<p align="center">
+    <i>
+    Example 009 SEGGER SystemView capture
+    </i>
+</p>
+
 # Resources
 * [FreeRTOS Emulator](https://www.freertos.org/FreeRTOS-Windows-Simulator-Emulator-for-Visual-Studio-and-Eclipse-MingW.html)
