@@ -271,5 +271,20 @@ It is important to note that this example has been designed to use the semaphore
     </i>
 </p>
 
+## Example 010_Count_Sema_Task
+The following example uses counting semaphores to process latched events (by the handler task) sent by fast triggering interrupts.
+
+### RTOS API's Used
+* [FreeRTOS Semaphores](https://www.freertos.org/a00113.html)
+
+<p align="center">
+    <img title="Example 010 SystemView" alt="SEGGER SystemView" src="./Recordings/010_recording_image.png" width="1000" height="500">
+</p>
+<p align="center">
+    <i>
+    Example 010 SEGGER SystemView capture
+    </i>
+</p>
+
 # Resources
 * [FreeRTOS Emulator](https://www.freertos.org/FreeRTOS-Windows-Simulator-Emulator-for-Visual-Studio-and-Eclipse-MingW.html)
