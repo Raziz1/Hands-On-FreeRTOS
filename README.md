@@ -286,5 +286,36 @@ The following example uses counting semaphores to process latched events (by the
     </i>
 </p>
 
+## Example 011_Mutex_API
+The following example uses mutexes to protect data or other resources from concurrent access. In this example the shared resource is the UART transmit buffer. Without a mutex the tasks would attempt interrupt each other as they try to transmit data over UART. In this example if you disable the mutex you can observe this through the REALTERM UART port. As the tasks attempt to access the UART terminal without mutexes they mix and match transmissions.
+
+3 ways to protect critical sections
+* Binary semaphore
+* Mutex
+* Crude way (disabling interrupts of the system, either globally, or up to a specific interrupt priority level)
+
+### Advantages of Mutex over Binary Semaphore
+* Priority inheritance - Mutexes are able to avoid the problems of priority inversion through a priority inheritance feature.
+* You can learn more about priority inversion here --> [Introduction to RTOS - Solution to Part 11 (Priority Inversion)](https://www.digikey.ca/en/maker/projects/introduction-to-rtos-solution-to-part-11-priority-inversion/abf4b8f7cd4a4c70bece35678d178321)
+
+
+### RTOS API's Used
+* [FreeRTOS Semaphore Mutex](https://www.freertos.org/CreateMutex.html)
+
+<p align="center">
+    <img title="Example 011 SystemView" alt="SEGGER SystemView" src="./Recordings/011_recording_image.png" width="1000" height="500">
+</p>
+<p align="center">
+    <i>
+    Example 011 SEGGER SystemView capture
+    </i>
+</p>
+
+In the above example...
+1. Task 2 (Higher priority) finishes running and triggers a blocking delay for 4ms.
+2. Task 1 runs and begins transmitting over UART.
+3. At the end of the 4ms delay Task 2 is ready to run.
+4. Task 1 hasn't completed transmitting over UART. Using mutexes it prevents Task 2 from running by calling a priority inheritance (Increases Task 1 priority to the same priority as Task 2) which allows it to complete its UART transmission. 
+
 # Resources
 * [FreeRTOS Emulator](https://www.freertos.org/FreeRTOS-Windows-Simulator-Emulator-for-Visual-Studio-and-Eclipse-MingW.html)
